@@ -1,24 +1,21 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowRight, ChevronRight, ClipboardCheck, Cog, Headphones, Settings2, Wrench } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import heroImage from "@/assets/bryanspaxe-hero.jpg";
+import instrumentationImage from "@/assets/instrumentation.jpg";
+import electricalImage from "@/assets/electrical.jpg";
+import mechanicalImage from "@/assets/mechanical.jpg";
+import { clients, industries, partners, projects } from "@/components/site-data";
+import { Eyebrow, ProcessSection, SectionHeading } from "@/components/site-content";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
-  component: Index,
-});
-
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
+export const Route = createFileRoute("/")({ head: () => ({ meta: [{ title: "Industrial Procurement & Engineering | Bryanspaxe" }, { name: "description", content: "Bryanspaxe delivers instrumentation, electrical and mechanical procurement, engineering consultation, installation and maintenance across West Africa." }, { property: "og:title", content: "Bryanspaxe Integrated Services" }, { property: "og:description", content: "Precision supply. Proven engineering. Dependable delivery across West Africa." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: Home });
+function Home() { return <>
+<section className="relative min-h-[76vh] overflow-hidden bg-brand-navy text-primary-foreground"><img src={heroImage} alt="Engineer inspecting process equipment at an industrial facility" width="1920" height="1088" fetchPriority="high" className="absolute inset-0 h-full w-full object-cover"/><div className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/80 to-transparent"/><div className="relative mx-auto flex min-h-[76vh] max-w-7xl items-center px-5 py-24 lg:px-8"><div className="max-w-3xl animate-rise"><Eyebrow inverse>Industrial solutions • West Africa</Eyebrow><h1 className="text-5xl font-extrabold leading-[1.08] md:text-7xl">Precision supply.<br/>Proven engineering.</h1><p className="mt-7 max-w-2xl text-lg leading-8 text-primary-foreground/80 md:text-xl">We source, install and support critical industrial equipment—keeping complex operations moving safely and reliably.</p><div className="mt-9 flex flex-wrap gap-3"><Button asChild variant="hero" size="lg"><Link to="/contact">Get a quote <ArrowRight/></Link></Button><Button asChild variant="heroOutline" size="lg"><Link to="/procurement/instrumentation">Explore services</Link></Button></div></div></div><div className="absolute bottom-0 left-0 right-0 border-t border-primary-foreground/20 bg-surface-dark/80 backdrop-blur"><div className="mx-auto flex max-w-7xl flex-wrap gap-x-10 gap-y-2 px-5 py-4 text-xs font-bold uppercase text-primary-foreground/70 lg:px-8"><span>Procurement</span><span>Engineering</span><span>Installation</span><span>Maintenance</span></div></div></section>
+<section className="py-20"><div className="mx-auto max-w-7xl px-5 lg:px-8"><SectionHeading eyebrow="What we do" title="One accountable partner for the industrial lifecycle." copy="From the first specification to commissioning and aftercare, our teams connect global supply capability with practical engineering expertise."/><div className="mt-12 grid gap-5 lg:grid-cols-3">{[[ClipboardCheck,"Procurement","Verified instrumentation, electrical and mechanical equipment sourced to your requirements.","/procurement/instrumentation"],[Settings2,"Engineering Services","Feasibility, system design and project management grounded in operating reality.","/engineering-consultation"],[Wrench,"Installation & Maintenance","Field support that protects performance, uptime and the life of your assets.","/installation-maintenance"]].map(([Icon,title,copy,to]) => <article key={title as string} className="group border-t-4 border-primary bg-card p-8 shadow-sm transition-transform hover:-translate-y-1"><Icon className="size-9 text-primary"/><h3 className="mt-8 text-2xl font-bold">{title as string}</h3><p className="mt-4 leading-7 text-muted-foreground">{copy as string}</p><Link to={to as "/engineering-consultation"} className="mt-7 inline-flex items-center gap-2 text-sm font-bold text-primary">Learn more <ChevronRight className="size-4"/></Link></article>)}</div></div></section>
+<section className="bg-surface-soft py-20"><div className="mx-auto max-w-7xl px-5 lg:px-8"><SectionHeading eyebrow="Industries we serve" title="Experience where reliability is non-negotiable."/><div className="mt-12 grid grid-cols-2 gap-px bg-border md:grid-cols-4">{industries.map(([Icon,label]) => <div key={label} className="bg-background p-6 md:p-8"><Icon className="size-7 text-brand-green"/><p className="mt-6 font-bold">{label}</p></div>)}</div></div></section>
+<ProcessSection/>
+<section className="py-20"><div className="mx-auto max-w-7xl px-5 lg:px-8"><div className="flex items-end justify-between gap-5"><SectionHeading eyebrow="Selected work" title="Delivery proven in the field."/><Button asChild variant="outline"><Link to="/projects">View all projects <ArrowRight/></Link></Button></div><div className="mt-12 grid gap-5 md:grid-cols-2">{projects.slice(0,4).map((p,i) => <Link key={p.title} to="/projects" className="group relative min-h-80 overflow-hidden bg-brand-navy p-8 text-primary-foreground"><img src={[instrumentationImage,electricalImage,mechanicalImage,heroImage][i]} alt="" loading="lazy" width="1408" height="1008" className="absolute inset-0 h-full w-full object-cover opacity-35 transition-transform duration-500 group-hover:scale-105"/><div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/50 to-transparent"/><div className="relative flex h-full flex-col justify-end"><p className="text-xs font-bold uppercase text-brand-green">{p.client} • {p.location}</p><h3 className="mt-3 text-2xl font-bold">{p.title}</h3><p className="mt-3 max-w-xl text-sm leading-6 text-primary-foreground/70">{p.scope}</p></div></Link>)}</div></div></section>
+<section className="border-y border-border bg-background py-16"><div className="mx-auto max-w-7xl px-5 lg:px-8"><p className="text-center text-xs font-extrabold uppercase text-muted-foreground">OEM relationships</p><div className="mt-8 flex flex-wrap justify-center gap-x-10 gap-y-6">{partners.map(p=><span key={p} title={p} className="text-lg font-extrabold text-foreground/65">{p}</span>)}</div></div></section>
+<section className="bg-surface-soft py-16"><div className="mx-auto max-w-7xl px-5 lg:px-8"><p className="text-center text-xs font-extrabold uppercase text-muted-foreground">Trusted across industry</p><div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">{clients.map(c=><div key={c} title={c} className="flex min-h-20 items-center justify-center border border-border bg-background px-4 text-center text-sm font-bold text-foreground/70">{c}</div>)}</div></div></section>
+<section className="bg-primary py-16 text-primary-foreground"><div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-7 px-5 md:flex-row md:items-center lg:px-8"><div><p className="text-sm font-bold text-brand-green">Ready when your operation is.</p><h2 className="mt-2 text-3xl font-extrabold">Bring us the specification. We’ll take it from there.</h2></div><Button asChild variant="hero" size="lg"><Link to="/contact">Start an enquiry <ArrowRight/></Link></Button></div></section>
+</> }
