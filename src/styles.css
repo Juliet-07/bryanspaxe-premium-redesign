@@ -19,7 +19,8 @@
  */
 
 @theme inline {
-  --font-sans: "Open Sans", sans-serif;
+  --font-sans: "Manrope", sans-serif;
+  --font-display: "Sora", sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -68,14 +69,14 @@
 }
 
 :root {
-  --radius: 0.35rem;
-  --background: oklch(0.99 0.003 250);
-  --foreground: oklch(0.22 0.025 256);
+  --radius: 0.25rem;
+  --background: oklch(0.985 0.004 250);
+  --foreground: oklch(0.19 0.025 253);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.129 0.042 264.695);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.45 0.2 264);
+  --primary: oklch(0.53 0.21 257);
   --primary-foreground: oklch(0.99 0.002 250);
   --secondary: oklch(0.968 0.007 247.896);
   --secondary-foreground: oklch(0.208 0.042 265.755);
@@ -101,11 +102,11 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
-  --brand-blue: oklch(0.45 0.2 264);
-  --brand-green: oklch(0.69 0.18 145);
-  --brand-navy: oklch(0.19 0.06 266);
-  --surface-dark: oklch(0.16 0.025 255);
-  --surface-soft: oklch(0.96 0.012 246);
+  --brand-blue: oklch(0.53 0.21 257);
+  --brand-green: oklch(0.68 0.18 145);
+  --brand-navy: oklch(0.16 0.04 253);
+  --surface-dark: oklch(0.12 0.025 253);
+  --surface-soft: oklch(0.97 0.01 246);
 }
 
 .dark {
@@ -156,6 +157,11 @@
     text-rendering: optimizeLegibility;
   }
 
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: 0;
+  }
+
   html { scroll-behavior: smooth; }
   ::selection { background: color-mix(in oklab, var(--brand-green) 35%, transparent); }
 }
@@ -165,8 +171,40 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes signal-pulse {
+  0%, 100% { opacity: 0.35; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.25); }
+}
+
+@keyframes scan-down {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100vh); }
+}
+
+@keyframes progress-across {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
 @utility animate-rise {
   animation: rise-in 700ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+@utility animate-rise-delay {
+  animation: rise-in 700ms 180ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+@utility animate-signal {
+  animation: signal-pulse 2.4s ease-in-out infinite;
+}
+
+@utility animate-scan {
+  animation: scan-down 8s linear infinite;
+}
+
+@utility animate-progress {
+  animation: progress-across 1.2s cubic-bezier(.2,.8,.2,1) both;
+  transform-origin: left;
 }
 
 @media (prefers-reduced-motion: reduce) {
