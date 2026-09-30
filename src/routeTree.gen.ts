@@ -10,8 +10,10 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as EngineeringConsultationRouteImport } from './routes/engineering-consultation'
 import { Route as InstallationMaintenanceRouteImport } from './routes/installation-maintenance'
+import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ProcurementElectricalRouteImport } from './routes/procurement.electrical'
 import { Route as ProcurementInstrumentationRouteImport } from './routes/procurement.instrumentation'
 import { Route as ProcurementMechanicalRouteImport } from './routes/procurement.mechanical'
@@ -22,6 +24,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const EngineeringConsultationRoute = EngineeringConsultationRouteImport.update({
   id: '/engineering-consultation',
   path: '/engineering-consultation',
@@ -30,6 +37,11 @@ const EngineeringConsultationRoute = EngineeringConsultationRouteImport.update({
 const InstallationMaintenanceRoute = InstallationMaintenanceRouteImport.update({
   id: '/installation-maintenance',
   path: '/installation-maintenance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProcurementElectricalRoute = ProcurementElectricalRouteImport.update({
@@ -57,8 +69,10 @@ const ProcurementPipesFittingsRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
   '/engineering-consultation': typeof EngineeringConsultationRoute
   '/installation-maintenance': typeof InstallationMaintenanceRoute
+  '/projects': typeof ProjectsRoute
   '/procurement/electrical': typeof ProcurementElectricalRoute
   '/procurement/instrumentation': typeof ProcurementInstrumentationRoute
   '/procurement/mechanical': typeof ProcurementMechanicalRoute
@@ -66,8 +80,10 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
   '/engineering-consultation': typeof EngineeringConsultationRoute
   '/installation-maintenance': typeof InstallationMaintenanceRoute
+  '/projects': typeof ProjectsRoute
   '/procurement/electrical': typeof ProcurementElectricalRoute
   '/procurement/instrumentation': typeof ProcurementInstrumentationRoute
   '/procurement/mechanical': typeof ProcurementMechanicalRoute
@@ -76,8 +92,10 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/contact': typeof ContactRoute
   '/engineering-consultation': typeof EngineeringConsultationRoute
   '/installation-maintenance': typeof InstallationMaintenanceRoute
+  '/projects': typeof ProjectsRoute
   '/procurement/electrical': typeof ProcurementElectricalRoute
   '/procurement/instrumentation': typeof ProcurementInstrumentationRoute
   '/procurement/mechanical': typeof ProcurementMechanicalRoute
@@ -87,8 +105,10 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/contact'
     | '/engineering-consultation'
     | '/installation-maintenance'
+    | '/projects'
     | '/procurement/electrical'
     | '/procurement/instrumentation'
     | '/procurement/mechanical'
@@ -96,8 +116,10 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/contact'
     | '/engineering-consultation'
     | '/installation-maintenance'
+    | '/projects'
     | '/procurement/electrical'
     | '/procurement/instrumentation'
     | '/procurement/mechanical'
@@ -105,8 +127,10 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/contact'
     | '/engineering-consultation'
     | '/installation-maintenance'
+    | '/projects'
     | '/procurement/electrical'
     | '/procurement/instrumentation'
     | '/procurement/mechanical'
@@ -115,8 +139,10 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ContactRoute: typeof ContactRoute
   EngineeringConsultationRoute: typeof EngineeringConsultationRoute
   InstallationMaintenanceRoute: typeof InstallationMaintenanceRoute
+  ProjectsRoute: typeof ProjectsRoute
   ProcurementElectricalRoute: typeof ProcurementElectricalRoute
   ProcurementInstrumentationRoute: typeof ProcurementInstrumentationRoute
   ProcurementMechanicalRoute: typeof ProcurementMechanicalRoute
@@ -132,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/engineering-consultation': {
       id: '/engineering-consultation'
       path: '/engineering-consultation'
@@ -144,6 +177,13 @@ declare module '@tanstack/react-router' {
       path: '/installation-maintenance'
       fullPath: '/installation-maintenance'
       preLoaderRoute: typeof InstallationMaintenanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/procurement/electrical': {
@@ -179,8 +219,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ContactRoute: ContactRoute,
   EngineeringConsultationRoute: EngineeringConsultationRoute,
   InstallationMaintenanceRoute: InstallationMaintenanceRoute,
+  ProjectsRoute: ProjectsRoute,
   ProcurementElectricalRoute: ProcurementElectricalRoute,
   ProcurementInstrumentationRoute: ProcurementInstrumentationRoute,
   ProcurementMechanicalRoute: ProcurementMechanicalRoute,
